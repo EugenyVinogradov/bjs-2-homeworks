@@ -6,28 +6,63 @@
 Для этого:
 1. Создайте функцию конструктор `Student(name, gender, age)` и с помощью оператора `new` несколько экземпляров объектов (студентов). 
 
+function Student(name, gender, age) {
+  this.name = name;
+  this.gender = gender;
+  this.age = age;
+}
+
 2. Создайте доступный для всех экземпляров `student` метод `setSubject(subjectName)`, который при вызове будет устанавливать поле предмет `subject` экземпляра в `subjectName`. Для этого добавьте в свойство `Student.prototype` функции конструктора функцию `setSubject`.
 ```js
+
 Student.prototype.setSubject = function (subjectName) {
-  //ваш код
+  this.subject = subjectName;
 }
 ```
 
 3. Создайте метод `addMark(mark)` по аналогии с п.2, который при вызове будет добавлять студенту оценку `mark` в свойство (массив) `marks` объекта. Обратите внимание, что ранее мы нигде не задавали свойство marks для инстансов(экземпляров). Значит нам надо проверять, что свойство существует. Сделать это в методе можно следующим образом:
 ```js
+
+Student.prototype.addMark = function (mark) {
   if(this.marks === undefined){ 
-    // добавить первую оценку 
+    this.marks = [mark];
     } else {
-      // добавить вторую и последующие оценки в массив
+      this.marks.push(mark);
     }
+}
 ```
 
 4. Создайте метод `addMarks(mark1,mark2,mark3...)` по аналогии с п.2, который при вызове будет добавлять студенту сразу несколько оценок. 
 Подсказка: так как количество добавляемых оценок неизвестно, воспользуйтесь rest параметром.
 
+Student.prototype.addMarks = function (...args) {
+  if(this.marks === undefined){ 
+    this.marks = [...args];
+    } else {
+      this.marks.push(...args);
+    }
+}
+
 5. Создайте метод `getAverage()` по аналогии с п.2, который при вызове будет возвращать среднее арифметическое оценок студента.
 
+Student.prototype.getAverage = function () {
+  if(this.marks === undefined){ 
+    return "У студента нет оценок";
+    }
+    let sum =0;
+    for (let mark of this.marks) {
+      sum = sum + mark;
+    }
+    return sum/this.marks.length;  
+}
+
 6. Создайте метод `exclude(reason)` по аналогии с п.2, который при вызове будет исключать студента из учебного процесса и устанавливать причину исключения. Для этого надо удалить свойства `subject` и `marks` и добавить свойство `excluded` со значением `reason`.
+
+Student.prototype.exclude = function (reason) {
+  delete this.subject;
+  delete this.marks;
+  this.excluded = reason;
+}
 
 ### Пример:
 ```js

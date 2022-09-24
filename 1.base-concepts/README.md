@@ -19,6 +19,20 @@
 
 7. Если дискриминант больше нуля, то существует 2 решения уравнения. Их необходимо вычислить и вернуть из функции (массив с двумя корнями): `(-b + Math.sqrt(d) )/(2*a)` и `(-b - Math.sqrt(d) )/(2*a)`.
 
+"use strict";
+function solveEquation(a, b, c) {
+  let arr;
+  arr = [];
+  let d = b**2-4*a*c;
+  if (d === 0) {
+    arr[0] = -b/(2*a);
+  } else if (d > 0) {
+    arr[0] = (-b + Math.sqrt(d) )/(2*a);
+    arr[1] = (-b - Math.sqrt(d) )/(2*a);
+  }
+  return arr;
+}
+
 ## Задача № 2
 
 > Задача со "звездочкой", ее выполнение не влияет на получение допуска до дипломной работы, но принесет много полезного опыта.
@@ -30,6 +44,27 @@
 Не забывайте, что вы должны работать с числами: если параметр функции будет строкой, то попытайтесь преобразовать в число. Во всех остальных случаях возвращайте строку: `“Параметр <название параметра> содержит неправильное значение <значение параметра>”`.
 
 Обратите внимание, что в инпуте пользователь указывает конечную дату, поэтому в функции необходимо посчитать срок в месяцах на основе введенной даты. (вам потребуется использовать встроенный объект Date)
+
+function calculateTotalMortgage(percent, contribution, amount, date) {
+  let totalAmount;
+  if (Number.isNaN(parseInt(percent))) {
+    return `Параметр "Процентная ставка" содержит неправильное значение "${percent}"`;
+  }
+  if (Number.isNaN(parseInt(contribution))) {
+    return `Параметр "Начальный взнос" содержит неправильное значение "${contribution}"`;
+  }
+  if (Number.isNaN(parseInt(amount))) {
+    return `Параметр "Общая стоимость" содержит неправильное значение "${amount}"`;
+  }
+  percent = percent/1200;
+  let creditSum = amount - contribution;
+  let currentDate = new Date();
+  let mortgageEndDate = new Date(date);
+  let countOfMonth = mortgageEndDate.getMonth() - currentDate.getMonth() + (mortgageEndDate.getFullYear() - currentDate.getFullYear())*12;
+  let monthOfAmount = creditSum*(percent +(percent/(Math.pow((1+percent),countOfMonth)-1)));
+  totalAmount = Math.round(countOfMonth*monthOfAmount*100)/100;
+  return totalAmount;
+}
 
 ### Процесс реализации:
 1. Активируйте строгий режим соответствия.
