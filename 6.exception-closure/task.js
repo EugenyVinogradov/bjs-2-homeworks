@@ -32,7 +32,7 @@ class Triangle {
         return (this.a + this.b + this.c);
     }
     getArea() {
-        return parseCount(Math.sqrt(this.getPerimeter() * (this.getPerimeter() / 2 - this.a) 
+        return Number.parseFloat(Math.sqrt(this.getPerimeter() * (this.getPerimeter() / 2 - this.a) 
         * (this.getPerimeter() / 2 - this.b) * (this.getPerimeter() / 2 - this.c) / 2).toFixed(3));
     }
 }
@@ -41,13 +41,15 @@ function getTriangle(a, b ,c) {
     try {
         return new Triangle(a, b ,c);
     } catch (err) {
-        return new Object( {
+        return new Object( 
+            {
             getPerimeter() {
                 return "Ошибка! Треугольник не существует" 
             } ,
             getArea() {
                 return "Ошибка! Треугольник не существует"
             }
-        } )
+            } 
+        )
     }
 }
