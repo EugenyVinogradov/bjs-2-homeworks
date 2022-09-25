@@ -32,7 +32,7 @@ class Triangle {
         return (this.a + this.b + this.c);
     }
     getArea() {
-        return Number.parseFloat(Math.sqrt(this.getPerimeter() * (this.getPerimeter() / 2 - this.a) 
+        return parseCount(Math.sqrt(this.getPerimeter() * (this.getPerimeter() / 2 - this.a) 
         * (this.getPerimeter() / 2 - this.b) * (this.getPerimeter() / 2 - this.c) / 2).toFixed(3));
     }
 }
