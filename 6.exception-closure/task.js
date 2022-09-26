@@ -1,6 +1,7 @@
 // Задача №1. Форматтер чисел
 
-function parseCount(value) {   
+function parseCount(value) {  
+    debugger;
     let result = Number.parseFloat(value);  
     if (Number.isInteger(result)) {
         return result;
@@ -14,6 +15,8 @@ function validateCount(value) {
         return err;
     }
 }
+
+console.log(parseCount("154.23"))
 
 // Задача №2. Треугольник 
 
