@@ -1,12 +1,11 @@
 // Задача №1. Форматтер чисел
 
 function parseCount(value) {   
-    let result = Number.parseInt(value);  
+    let result = Number.parseFloat(value);  
     if (Number.isInteger(result)) {
         return result;
-    } else {
-        throw new Error("Невалидное значение"); 
     }
+    throw new Error("Невалидное значение"); 
 }
 function validateCount(value) {
     try {
@@ -22,11 +21,10 @@ class Triangle {
     constructor (a, b, c) {
         if (a + b < c || a + c < b || b + c < a) {
             throw new Error("Треугольник с такими сторонами не существует");
-        } else {
-            this.a = a;
-            this.b = b;
-            this.c = c;
         }
+        this.a = a;
+        this.b = b;
+        this.c = c;
     }
     getPerimeter() {
         return (this.a + this.b + this.c);
