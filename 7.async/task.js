@@ -16,8 +16,8 @@ class AlarmClock {
         this.alarmCollection.push({time,callback,id});
     }
     removeClock(id) {
-        if (this.alarmCollection.filter(alarm => alarm.id === id)) {
-            this.alarmCollection = this.alarmCollection.filter(alarm => alarm.id !== id);
+        if (this.alarmCollection.some((alarm) => alarm.id === id)) {
+            this.alarmCollection = this.alarmCollection.filter((alarm) => alarm.id !== id);
             return true;
         }
         return false;
@@ -32,8 +32,8 @@ class AlarmClock {
             let time = this.getCurrentFormattedTime();
             console.log(time);
             if (alarm.time === time) {
-                // return console.log(this);
-                return alarm.callback();
+                alarm.callback();
+                return;
             }
         }
         if (this.timerId === null) {
